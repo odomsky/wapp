@@ -12,5 +12,6 @@ public class WAppApplicationAutoMapperProfile : Profile
          * into multiple profile classes for a better organization. */
         CreateMap<Exercise, ExerciseDto>();
         CreateMap<CreateUpdateExerciseDto, Exercise>();
+        CreateMap<ExerciseDto, CreateUpdateExerciseDto>();
     }
 }

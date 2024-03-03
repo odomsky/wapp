@@ -1,0 +1,36 @@
+﻿@page "{id?}"
+@model WApp.Web.Pages.Exercises.CreateOrEditModel
+
+@{
+    ViewData["Title"] = Model.ExerciseId.HasValue ? "Edit Exercise" : "Create Exercise";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<form method="post">
+    @if (Model.ExerciseId.HasValue)
+    {
+        <input type="hidden" asp-for="ExerciseId" />
+    }
+
+    <div class="form-group">
+        <label asp-for="CreateUpdateExerciseDto.Name" class="control-label"></label>
+        <input asp-for="CreateUpdateExerciseDto.Name" class="form-control" />
+        <span asp-validation-for="CreateUpdateExerciseDto.Name" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="CreateUpdateExerciseDto.Description" class="control-label"></label>
+        <textarea asp-for="CreateUpdateExerciseDto.Description" class="form-control"></textarea>
+        <span asp-validation-for="CreateUpdateExerciseDto.Description" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-success">@ViewData["Title"]</button>
+    <a asp-page="Index" class="btn btn-info">Back to List</a>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

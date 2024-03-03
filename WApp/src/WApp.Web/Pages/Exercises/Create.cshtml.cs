@@ -27,19 +27,26 @@ namespace WApp.Web.Pages.Exercises
             return Page();
         }
 
-        [BindProperty]
         public Exercise Exercise { get; set; } = default!;
 
-        // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(CreateUpdateExerciseDto exerciseDto)
         {
+           
             if (!ModelState.IsValid)
             {
+                foreach (var modelStateKey in ViewData.ModelState.Keys)
+                {
+                    var value = ViewData.ModelState[modelStateKey];
+                    foreach (var error in value.Errors)
+                    {
+                        var errorMessage = error.ErrorMessage;
+                    }
+                }
                 return Page();
             }
 
             await _exerciseAppService.CreateAsync(exerciseDto);
-            return RedirectToPage("Index"); // Or wherever you want to redirect after creation
+            return RedirectToPage("Index");
         }
     }
 }
